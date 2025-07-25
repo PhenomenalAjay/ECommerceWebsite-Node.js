@@ -1,6 +1,3 @@
-
-<<<<<<< HEAD
-
 ### Click "[Live Demo](https://e-commerce-websites-3l2v.onrender.com)" to view my Website .
 
 ---
