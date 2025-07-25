@@ -20,20 +20,25 @@
 </head>
 
 <body class="font-poppins m-0 p-0">
+    <!-- backgroound video
+    <video autoplay muted loop  class="top-0 left-0 w-full h-full object-cover absolute z-60 ">
+        <source src="/assests/fotor-video_remover_object-preview-20250723075216.mp4" type="video/mp4" />
+    </video> -->
+
     <!-- nav bar -->
-    <nav class="flex justify-between items-center p-4">
+    <nav class="flex justify-between items-center p-4 navbar" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;">
         <h1 class="font-bold text-xl">Famous Shopin</h1>
 
-        <div class="hidden sm:flex space-x-5">
-            <p><a href="/" class="no-underline text-gray-900">Home</a></p>
-            <p><a href="/collection" class="no-underline text-gray-900">Collection</a></p>
-            <p><a href="/wishlist" class="no-underline text-gray-900">Wishlist</a></p>
-        </div>
+            <div class="hidden sm:flex space-x-5">
+                <p><a href="/" class="no-underline text-gray-900">Home</a></p>
+                <p><a href="/collection" class="no-underline text-gray-900">Collection</a></p>
+                <p><a href="/wishlist" class="no-underline text-gray-900">Wishlist</a></p>
+            </div>
 
-        <div class="block sm:hidden">
-            <i class="fa-solid fa-bars cursor-pointer" onclick="shownavbar()"></i>
-        </div>
-    </nav>
+            <div class="block sm:hidden">
+                <i class="fa-solid fa-bars cursor-pointer" onclick="shownavbar()"></i>
+            </div>
+        </nav>
 
     <!-- side navbar -->
     <div class="w-2/5 h-full fixed top-0 p-5 text-white transition-all duration-500 bg-blue-400 z-50" id="side-navbar"
@@ -49,15 +54,44 @@
     </div>
 
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-center gap-12 p-12  ">
-        <div>
+    <div class="flex flex-col sm:flex-row  gap-12 p-12 justify-center items-center">
+        <div  class="text-center">
             <h1 class="font-extrabold text-2xl mb-2">Level up your products</h1>
             <p class="mb-4">With our Collection</p>
-            <button id="shop-now-button" class="px-5 py-2.5 mt-2.5 bg-black text-white rounded">
-                Shop now
-            </button>
+                <button id="shop-now-button" class="px-5 py-2.5 mt-2.5 bg-black text-white rounded">
+                    Shop now
+                </button>
+                <button id="signup-button" class="px-5 py-2.5 mt-2.5 border border-black rounded ml-4">
+                    Sign Up
+                </button>
+                <div id="signup-card" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div class="bg-white p-6 rounded shadow-lg w-80 relative z-60">
+                        <h2 class="text-xl font-bold mb-4">Sign Up</h2>
+                        <form id="signup-form" class="space-y-4">
+                            <div>
+                                <label for="signup-username" class="block text-gray-700 font-semibold mb-1">Username</label>
+                                <input type="text" id="signup-username" name="username" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+                            <div>
+                                <label for="signup-password" class="block text-gray-700 font-semibold mb-1">Password</label>
+                                <input type="password" id="signup-password" name="password" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+                            <div class="flex justify-between">
+                                <button type="button" id="sign-in-button"
+                                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition duration-200">Sign In</button>
+                                <button type="submit"
+                                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200">Create Account</button>
+                            </div>
+                        </form>
+                        <div id="login-message" class="mt-2 text-center text-red-600"></div>
+                    </div>
+                </div>
         </div>    
-        <div class="images mt-0 sm:mt-0 flex justify-center items-center">
+    </div>
+    <div class="flex flex-col sm:flex-row justify-center gap-12 p-12 height-150 width-150" style="border-radius: 1px solid black;" >   
+        <div class="images mt-3 sm:mt-0 flex justify-center items-center" >
             <!-- IMAGES -->
         </div>       
     </div>
@@ -65,14 +99,8 @@
         
     <!-- Service -->
     <div class="p-5">
-        <div class="flex justify-between items-center">
-            <!-- <div>
-                <h2 class="font-bold text-lg absolute left-80 bottom-50">Fast Delivery</h2>
-                <h2 class="font-bold text-lg ">Customer Experience</h2>
-            </div> -->
 
-        </div>
-        <div class="hidden sm:flex justify-between items-center gap-2.5 flex-col sm:flex-row mt-14 fixed">
+        <div class="hidden sm:flex gap-2.5 flex-col sm:flex-row bottom-20 mb-20 w-full bg-white z-40 fixed left-0">
             <div class="bg-blue-100 rounded p-4 ">
                 <i class="fa-regular fa-face-smile"></i>
                 <h4 class="font-bold">Satisfaction garentee</h4>
@@ -214,6 +242,114 @@
 
         document.getElementById("shop-now-button").addEventListener("click", function () {
             window.location.href = "/collection?focusSearch=true";
+        });
+
+        document.getElementById("signup-button").addEventListener("click", function () {
+            const signupCard = document.getElementById("signup-card");
+            signupCard.classList.remove("hidden");
+        });
+
+        document.getElementById("sign-in-button").addEventListener("click", function () {
+            const signupCard = document.getElementById("signup-card");
+            signupCard.classList.add("hidden");
+        });
+
+        document.getElementById("signup-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            // Here you can add your create account logic
+            alert("Create Account clicked. Implement account creation logic.");
+        });
+
+        // Blur background when signup card is visible
+        const signupButton = document.getElementById("signup-button");
+        const signupCard = document.getElementById("signup-card");
+        const mainContent = document.querySelector("body > :not(#signup-card)");
+
+        signupButton.addEventListener("click", () => {
+            mainContent.classList.add("filter", "blur-sm", "pointer-events-none");
+        });
+
+        document.getElementById("sign-in-button").addEventListener("click", () => {
+            signupCard.classList.add("hidden");
+            mainContent.classList.remove("filter", "blur-sm", "pointer-events-none");
+        });
+
+        signupCard.addEventListener("click", (e) => {
+            if (e.target === signupCard) {
+                signupCard.classList.add("hidden");
+                mainContent.classList.remove("filter", "blur-sm", "pointer-events-none");
+            }
+        });
+
+        // New JavaScript for signup and login
+        const signupForm = document.getElementById("signup-form");
+        const loginMessage = document.getElementById("login-message");
+
+        signupForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            loginMessage.textContent = "";
+            const username = document.getElementById("signup-username").value;
+            const password = document.getElementById("signup-password").value;
+
+            try {
+                const response = await fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    loginMessage.style.color = "green";
+                    loginMessage.textContent = "Account created successfully. You can now log in.";
+                } else {
+                    loginMessage.style.color = "red";
+                    loginMessage.textContent = data.message || "Signup failed.";
+                }
+            } catch (error) {
+                loginMessage.style.color = "red";
+                loginMessage.textContent = "Error connecting to server.";
+            }
+        });
+
+        // Show signup form for login
+        document.getElementById("sign-in-button").addEventListener("click", async function () {
+            loginMessage.textContent = "";
+            const username = document.getElementById("signup-username").value;
+            const password = document.getElementById("signup-password").value;
+
+            if (!username || !password) {
+                loginMessage.style.color = "red";
+                loginMessage.textContent = "Please enter username and password to login.";
+                return;
+            }
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    loginMessage.style.color = "green";
+                    loginMessage.textContent = "Login successful.";
+                    // Hide signup modal and remove blur
+                    signupCard.classList.add("hidden");
+                    mainContent.classList.remove("filter", "blur-sm", "pointer-events-none");
+                    // Optionally hide signup button or change UI after login
+                    signupButton.style.display = "none";
+                } else {
+                    loginMessage.style.color = "red";
+                    loginMessage.textContent = data.message || "Login failed.";
+                }
+            } catch (error) {
+                loginMessage.style.color = "red";
+                loginMessage.textContent = "Error connecting to server.";
+            }
         });
     </script>
 </body>

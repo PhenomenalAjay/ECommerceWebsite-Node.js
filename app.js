@@ -1,18 +1,21 @@
+require('dotenv').config();
+
 const express = require('express')
 const app = express();
 const bodyParser = require('body-parser')
 const adminRoutes = require('./routes/admin.js');
 const shopRoutes = require('./routes/shop.js');
+const authRoutes = require('./routes/auth.js');
 const path = require('path');
-
 app.use(express.static(path.join(__dirname, 'images')));
-
 // Fix body-parser usage with extended option
 app.use(bodyParser.urlencoded({ extended: false })); // to parse the data from the request body
+app.use(bodyParser.json()); // to parse JSON data from the request body
 
 // app.use('/admin',adminRoutes)
 app.use(adminRoutes);
 app.use(shopRoutes);
+app.use(authRoutes);
 
 // 404 handler
 app.use((req,res,next)=>{
